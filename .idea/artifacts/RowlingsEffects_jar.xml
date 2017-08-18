@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="RowlingsEffects:jar">
+    <output-path>$PROJECT_DIR$/../../Servers/output</output-path>
+    <root id="archive" name="RowlingsEffects.jar">
+      <element id="module-output" name="RowlingsEffects" />
+    </root>
+  </artifact>
+</component>

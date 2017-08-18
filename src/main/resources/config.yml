@@ -1,0 +1,41 @@
+settings:
+  regular-cleanup:
+    enabled: true
+    delay: 0
+    interval: 60
+
+wand-skins:
+  - icon: diamond_hoe:50
+    name: "&3Basic Wand #1"
+    command: "wand configure icon diamond_hoe:50"
+    permission: "rowlingseffects.skins.basicwand1"
+  - icon: diamond_hoe:70
+    name: "&3Basic Wand #2"
+    command: "wand configure icon diamond_hoe:50"
+    permission: "rowlingseffects.skins.basicwand2"
+
+wand-colors:
+  - icon: ink_sack:14
+    name: "&4&lDark Red Effects"
+    command: "mgive %player% redeffects"
+    permission: "rowlingseffects.colors.darkred"
+  - icon: ink_sack:9
+    name: "&9&lBlue Effects"
+    command: "mgive %player% blueeffects"
+    permission: "rowlingseffects.colors.blue"
+
+patronuses:
+  - icon: ink_sack:2
+    name: "&bSheep Patronus"
+    command: "mgive %player% patronus_sheep"
+    permission: "rowlingseffects.patronuses.sheep"
+  - icon: ink_sack:2
+    name: "&bPig Patronus"
+    command: "mgive %player% patronus_pig"
+    permission: "rowlingseffects.patronuses.pig"
+
+hats:
+  - icon: ice
+    name: "&bIce"
+    command: "castp %player% equiphat brush ice"
+    permission: "rowlingseffects.hats.ice"

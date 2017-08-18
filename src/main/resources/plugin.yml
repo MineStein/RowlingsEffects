@@ -1,0 +1,10 @@
+name: RowlingsEffects
+version: 1.0.0
+main: com.aurelia_network.rowlingseffects.RowlingsEffectsPlugin
+
+depends: [Magic]
+
+commands:
+  effects:
+    description: View all wand skins, wand colors, patronuses, and hats!
+    aliases: [wands, colors, patronuses, patronus, hats]
