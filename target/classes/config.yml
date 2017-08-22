@@ -5,37 +5,58 @@ settings:
     interval: 60
 
 wand-skins:
-  - icon: diamond_hoe:50
+  basicwand1:
+    icon: diamond_hoe
+    damage: 50
+    data: 0
     name: "&3Basic Wand #1"
-    command: "wand configure icon diamond_hoe:50"
+    command: "wandp %player% configure icon diamond_hoe:50"
     permission: "rowlingseffects.skins.basicwand1"
-  - icon: diamond_hoe:70
+  basicwand2:
+    icon: diamond_hoe
+    damage: 70
+    data: 0
     name: "&3Basic Wand #2"
-    command: "wand configure icon diamond_hoe:50"
+    command: "wandp %player% configure icon diamond_hoe:70"
     permission: "rowlingseffects.skins.basicwand2"
 
 wand-colors:
-  - icon: ink_sack:14
+  darkred:
+    icon: ink_sack
+    damage: 0
+    data: 14
     name: "&4&lDark Red Effects"
     command: "mgive %player% redeffects"
     permission: "rowlingseffects.colors.darkred"
-  - icon: ink_sack:9
+  blue:
+    icon: ink_sack
+    damage: 0
+    data: 9
     name: "&9&lBlue Effects"
     command: "mgive %player% blueeffects"
     permission: "rowlingseffects.colors.blue"
 
 patronuses:
-  - icon: ink_sack:2
+  sheep:
+    icon: ink_sack
+    damage: 0
+    data: 2
     name: "&bSheep Patronus"
     command: "mgive %player% patronus_sheep"
     permission: "rowlingseffects.patronuses.sheep"
-  - icon: ink_sack:2
+  pig:
+    icon: ink_sack
+    damage: 0
+    data: 2
     name: "&bPig Patronus"
     command: "mgive %player% patronus_pig"
     permission: "rowlingseffects.patronuses.pig"
 
 hats:
-  - icon: ice
+  ice:
+    icon: ice
+    damage: 0
+    data: 0
     name: "&bIce"
     command: "castp %player% equiphat brush ice"
     permission: "rowlingseffects.hats.ice"

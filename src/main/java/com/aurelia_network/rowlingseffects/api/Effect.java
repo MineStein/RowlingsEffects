@@ -43,10 +43,19 @@ public class Effect implements ConfigurationSerializable {
 
     private String iconString, displayName, command;
     private Permission permission;
+    private int data, damage;
     private ItemStack icon;
 
     public String getIconString() {
         return iconString;
+    }
+
+    public int getData() {
+        return data;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public String getDisplayName() {
@@ -71,43 +80,46 @@ public class Effect implements ConfigurationSerializable {
 
     public Effect(Map<String, Object> map) {
         this.iconString = (String) map.get("icon");
+        this.data = (Integer) map.get("data");
+        this.damage = (Integer) map.get("damage");
         this.displayName = (String) map.get("name");
         this.command = (String) map.get("command");
         this.permission = new Permission((String) map.get("permission"));
+        this.icon = getItemIcon();
+    }
 
-        String[] split = iconString.split(":");
+    public Effect(String iconString, int data, int damage, String displayName, String command, Permission permission) {
+        this.iconString = iconString;
+        this.data = data;
+        this.damage = damage;
+        this.displayName = displayName;
+        this.command = command;
+        this.permission = permission;
+        this.icon = getItemIcon();
+    }
 
-        if (split.length > 0) {
-            Material material = Material.getMaterial(split[0]);
+    public ItemStack getItemIcon() {
+        Material material = Material.getMaterial(iconString.toUpperCase());
 
-            if (material != null) {
-                if (split.length > 1) {
-                    try {
-                        byte parsedData = Byte.parseByte(split[1]);
+        if (material == null) {
+            Bukkit.getLogger().severe("Uh oh!");
 
-                        this.icon = new ItemStack(material, 1, parsedData);
-
-                        return;
-                    } catch (NumberFormatException ignored) { }
-                } else {
-                    this.icon = new ItemStack(material);
-
-                    return;
-                }
-            }
+            return new ItemStack(Material.DIRT);
         }
 
-        this.icon = new ItemStack(Material.DIRT);
+        return new ItemStack(material, 1, (short) damage, (byte) data);
+    }
+
+    public static Effect deserialize(Map<String, Object> map) {
+        return new Effect((String) map.get("icon"), ((Integer) map.get("data")), ((Integer) map.get("damage")), (String) map.get("name"), (String) map.get("command"), new Permission((String) map.get("permission")));
     }
 
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
 
-        if (iconString != null) map.put("icon", iconString);
-        else if (icon != null) {
-            map.put("icon", icon.getType().toString().toLowerCase() + ":" + icon.getData());
-        }
-
+        map.put("icon", iconString);
+        map.put("data", data);
+        map.put("damage", damage);
         map.put("name", displayName);
         map.put("command", command);
         map.put("permission", permission.getName());
@@ -116,18 +128,29 @@ public class Effect implements ConfigurationSerializable {
     }
 
     public void playOut(Player player) {
+        if (!player.hasPermission(getPermission())) {
+            player.sendMessage("§7(§eEffects§7) §cYou do not own this effect. To obtain it purchase it at §4http://aurelia-network/store§c!");
+
+            return;
+        }
+
+        player.sendMessage("§7(§eEffects§7) §7You changed your effect to §r" + ChatColor.translateAlternateColorCodes('&', getDisplayName()) + "§7!");
+
         String cmd = command.replaceAll("%player%", player.getName());
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
     }
 
     public ItemStack getItem(Player player) {
-        ItemStack itemStack = getIcon(); {
+        ItemStack itemStack = getItemIcon(); {
+            itemStack.setDurability((short) damage);
+            itemStack.getData().setData((byte) data);
+
             ItemMeta meta = itemStack.getItemMeta();
 
             meta.setDisplayName("§3" + ChatColor.translateAlternateColorCodes('&', getDisplayName()));
             meta.setUnbreakable(true);
-            meta.getItemFlags().add(ItemFlag.HIDE_UNBREAKABLE);
+            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 
             List<String> lore = new ArrayList<String>();
 

@@ -81,7 +81,7 @@ public class InventoryListener implements Listener {
             if (ItemUtility.isSimilar(itemStack, "Back")) {
                 player.openInventory(new EffectsInventory(plugin).getInventory());
             } else {
-                Effect effect = plugin.getApi().getConfigurationManager().getEffects(Effect.EffectType.SKIN).get(slot);
+                Effect effect = plugin.getApi().getConfigurationManager().searchEffects(Effect.EffectType.SKIN, itemStack.getItemMeta().getDisplayName()).get(0);
 
                 effect.playOut(player);
             }
@@ -91,7 +91,7 @@ public class InventoryListener implements Listener {
             if (ItemUtility.isSimilar(itemStack, "Back")) {
                 player.openInventory(new EffectsInventory(plugin).getInventory());
             } else {
-                Effect effect = plugin.getApi().getConfigurationManager().getEffects(Effect.EffectType.COLORS).get(slot);
+                Effect effect = plugin.getApi().getConfigurationManager().searchEffects(Effect.EffectType.COLORS, itemStack.getItemMeta().getDisplayName()).get(0);
 
                 effect.playOut(player);
             }
@@ -101,7 +101,7 @@ public class InventoryListener implements Listener {
             if (ItemUtility.isSimilar(itemStack, "Back")) {
                 player.openInventory(new EffectsInventory(plugin).getInventory());
             } else {
-                Effect effect = plugin.getApi().getConfigurationManager().getEffects(Effect.EffectType.PATRONUSES).get(slot);
+                Effect effect = plugin.getApi().getConfigurationManager().searchEffects(Effect.EffectType.PATRONUSES, itemStack.getItemMeta().getDisplayName()).get(0);
 
                 effect.playOut(player);
             }
@@ -111,7 +111,7 @@ public class InventoryListener implements Listener {
             if (ItemUtility.isSimilar(itemStack, "Back")) {
                 player.openInventory(new EffectsInventory(plugin).getInventory());
             } else {
-                Effect effect = plugin.getApi().getConfigurationManager().getEffects(Effect.EffectType.HATS).get(slot);
+                Effect effect = plugin.getApi().getConfigurationManager().searchEffects(Effect.EffectType.HATS, itemStack.getItemMeta().getDisplayName()).get(0);
 
                 effect.playOut(player);
             }
