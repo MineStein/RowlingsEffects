@@ -24,14 +24,14 @@ wand-colors:
   darkred:
     icon: ink_sack
     damage: 0
-    data: 14
+    data: 1
     name: "&4&lDark Red Effects"
     command: "mgive %player% redeffects"
     permission: "rowlingseffects.colors.darkred"
   blue:
     icon: ink_sack
     damage: 0
-    data: 9
+    data: 4
     name: "&9&lBlue Effects"
     command: "mgive %player% blueeffects"
     permission: "rowlingseffects.colors.blue"
