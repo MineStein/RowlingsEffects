@@ -107,7 +107,11 @@ public class Effect implements ConfigurationSerializable {
             return new ItemStack(Material.DIRT);
         }
 
-        return new ItemStack(material, 1, (short) damage, (byte) data);
+        ItemStack itemStack = new ItemStack(material, 1, (short) damage); {
+            itemStack.getData().setData((byte) data);
+        }
+
+        return itemStack;
     }
 
     public static Effect deserialize(Map<String, Object> map) {
@@ -128,13 +132,15 @@ public class Effect implements ConfigurationSerializable {
     }
 
     public void playOut(Player player) {
+        player.closeInventory();
+
         if (!player.hasPermission(getPermission())) {
-            player.sendMessage("§7(§eEffects§7) §cYou do not own this effect. To obtain it purchase it at §4http://aurelia-network/store§c!");
+            player.sendMessage("§6(§eEffects§6) §cYou do not own this effect. Purchase it at §4http://aurelia-network.com/store§c!");
 
             return;
         }
 
-        player.sendMessage("§7(§eEffects§7) §7You changed your effect to §r" + ChatColor.translateAlternateColorCodes('&', getDisplayName()) + "§7!");
+        player.sendMessage("§6(§eEffects§6) §7You changed your effect to §r" + ChatColor.translateAlternateColorCodes('&', getDisplayName()) + "§7!");
 
         String cmd = command.replaceAll("%player%", player.getName());
 
@@ -142,10 +148,7 @@ public class Effect implements ConfigurationSerializable {
     }
 
     public ItemStack getItem(Player player) {
-        ItemStack itemStack = getItemIcon(); {
-            itemStack.setDurability((short) damage);
-            itemStack.getData().setData((byte) data);
-
+        ItemStack itemStack = getIcon(); {
             ItemMeta meta = itemStack.getItemMeta();
 
             meta.setDisplayName("§3" + ChatColor.translateAlternateColorCodes('&', getDisplayName()));

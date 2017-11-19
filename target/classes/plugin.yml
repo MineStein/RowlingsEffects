@@ -5,6 +5,8 @@ main: com.aurelia_network.rowlingseffects.RowlingsEffectsPlugin
 depends: [Magic]
 
 commands:
+  rowlingseffects:
+    description: Reload the plugin.
   effects:
     description: View all wand skins, wand colors, patronuses, and hats!
     aliases: [wands, colors, patronuses, patronus, hats]
